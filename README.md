@@ -37,4 +37,4 @@ add the path of the executable as second or third flag when running the tester:
 ## Bug report
 
 If you find some bugs or errors of any type, please, report them to me. You can
-contact me on slack: adi-stef
+contact me on slack: @adi-stef
