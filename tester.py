@@ -6,7 +6,7 @@
 #    By: adi-stef <adi-stef@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 15:55:16 by adi-stef          #+#    #+#              #
-#    Updated: 2023/04/09 22:40:35 by adi-stef         ###   ########.fr        #
+#    Updated: 2023/04/13 18:15:58 by adi-stef         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ from math import factorial
 
 MAX = 2147483647
 MIN = -2147483648
-P = "./push_swap"
-C = "./checker_linux"
-CB = "./checker"
+P = "./../push_swap"
+C = "./../checker_linux"
+CB = "./../checker"
 
 g = "\033[32m"
 r = "\033[31m"
