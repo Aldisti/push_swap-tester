@@ -6,7 +6,7 @@
 #    By: adi-stef <adi-stef@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 15:55:16 by adi-stef          #+#    #+#              #
-#    Updated: 2023/04/13 18:29:35 by adi-stef         ###   ########.fr        #
+#    Updated: 2023/04/13 22:29:32 by adi-stef         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ from math import factorial
 
 MAX = 2147483647
 MIN = -2147483648
-P = "./push_swap"
+P = "./../push_swap"
 C = "./checker_linux"
-CB = "./checker"
+CB = "./../checker"
 
 g = "\033[32m"
 r = "\033[31m"
@@ -32,7 +32,6 @@ e = "\033[0m"
 def ft_check(ntests, nargv, tosave, checker=C):
     comb = []
     moves = []
-    ok = 0
     ko = 0
     tests = 0
     start = perf_counter()
@@ -45,16 +44,15 @@ def ft_check(ntests, nargv, tosave, checker=C):
         tests += 1
         if (out == "OK"):
             moves.append(int(getoutput(f'{P} {abc} | wc -l | grep -o "[0-9]\+"')))
-            ok += 1
         elif (out == "KO"): ko += 1
         else: print(f"Got this output: [{out}] with this input: [{abc}]"); break
     time = round(perf_counter() - start, 2)
     if (tosave == 1):
         with open('test.out', 'w') as f:
-            f.write(f"tests: {tests}\nok: {ok}\nko: {ko}\nnumbers: {nargv}\nmax: {max(moves)}\nmin: {min(moves)}\navg: {sum(moves) // len(moves)}\ntime: {time}\n")
+            f.write(f"tests: {tests}\nok: {len(moves)}\nko: {ko}\nnumbers: {nargv}\nmax: {max(moves)}\nmin: {min(moves)}\navg: {sum(moves) // len(moves)}\ntime: {time}\n")
     elif (tosave == -1):
-        return ([tests, ok, ko, time, nargv, moves])
-    print(f"tests: {b}{tests}{e} - ok: {g}{ok}{e} - ko: {r}{ko}{e} - numbers: {nargv} - max: {max(moves)} - min: {min(moves)} - avg: {sum(moves) // len(moves)} - time: {time}")
+        return ([tests, len(moves), ko, time, nargv, moves])
+    print(f"tests: {b}{tests}{e} - len(moves): {g}{len(moves)}{e} - ko: {r}{ko}{e} - numbers: {nargv} - max: {max(moves)} - min: {min(moves)} - avg: {sum(moves) // len(moves)} - time: {time}")
 
 def ft_check_m():
     ft_check(6, 3, 0)
@@ -87,12 +85,6 @@ def ft_check_b():
 
 
 
-tests = 0
-error = 0
-ok = 0
-lko = []
-comb = []
-
 if (__name__ == '__main__'):
     if (len(argv) == 1):
         print(f"""by {p}Aldisti{e} with love and something else...\nThis is a simple python tester for {b}push_swap{e} a project of the 42Cursus
@@ -100,9 +92,18 @@ You can run this script in 2 different ways:
 {b}python3 tester.py{e} {g}m{e} -> this will test your algo with 3, 5, 100 and 500 numbers
 {b}python3 tester.py{e} {g}b{e} -> this will do some tests with your checker
 {b}python3 tester.py{e} {g}a{e} -> this will do both m and b
-{b}python3 tester.py{e} {g}[number_of_tests] [length_of_stack]{e}"""); exit(0)
-    if (not access(P, X_OK)): print(f"{b}Error{e}\n{r}[{P[2:]}] executable must be present in this dir and must have permissions{e}"); exit(1)
-    if (not access(C, X_OK)): print(f"{b}Error{e}\n{r}[{C[2:]}] executable must be present in this dir and must have permissions{e}"); exit(1)
+{b}python3 tester.py{e} {g}[number_of_tests] [stack_size]{e}""")
+        exit(0)
+
+    if (getoutput("uname") == "Linux"): C = "./checker_linux"
+    else: C = "./checker_Mac"
+
+    if (not access(P, X_OK)):
+        print(f"{b}Error{e}\n{r}[{P[4:]}] executable must be present in this dir and must have permissions{e}")
+        exit(1)
+    if (not access(C, X_OK)):
+        print(f"{b}Error{e}\n{r}[{C[2:]}] executable must be present in this dir and must have permissions{e}")
+        exit(1)
     if (len(argv) == 2):
         if (argv[1] == 'm'):
             ft_check_m()
@@ -118,5 +119,6 @@ You can run this script in 2 different ways:
         try:
             av = [int(argv[1]), int(argv[2])]
         except ValueError:
-            print(f"{b}Error{e}\n{r}Command should be:{e} {g}python3 tester.py [number_of_tests] [length_of_stack]{e}"); exit(1)
+            print(f"{b}Error{e}\n{r}Command should be:{e} {g}python3 tester.py [number_of_tests] [length_of_stack]{e}")
+            exit(1)
         ft_check(av[0], av[1], 0)
