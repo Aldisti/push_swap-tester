@@ -6,7 +6,7 @@
 #    By: adi-stef <adi-stef@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 15:55:16 by adi-stef          #+#    #+#              #
-#    Updated: 2023/04/13 18:15:58 by adi-stef         ###   ########.fr        #
+#    Updated: 2023/04/13 18:29:35 by adi-stef         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ from math import factorial
 
 MAX = 2147483647
 MIN = -2147483648
-P = "./../push_swap"
-C = "./../checker_linux"
-CB = "./../checker"
+P = "./push_swap"
+C = "./checker_linux"
+CB = "./checker"
 
 g = "\033[32m"
 r = "\033[31m"
@@ -31,7 +31,7 @@ e = "\033[0m"
 
 def ft_check(ntests, nargv, tosave, checker=C):
     comb = []
-    moves = [1, 2, 3]
+    moves = []
     ok = 0
     ko = 0
     tests = 0
@@ -94,8 +94,6 @@ lko = []
 comb = []
 
 if (__name__ == '__main__'):
-    if (not access(P, X_OK)): print(f"{b}Error{e}\n{r}[{P[2:]}] executable must be present in this dir and must have permissions{e}"); exit(1)
-    if (not access(C, X_OK)): print(f"{b}Error{e}\n{r}[{C[2:]}] executable must be present in this dir and must have permissions{e}"); exit(1)
     if (len(argv) == 1):
         print(f"""by {p}Aldisti{e} with love and something else...\nThis is a simple python tester for {b}push_swap{e} a project of the 42Cursus
 You can run this script in 2 different ways:
@@ -103,7 +101,9 @@ You can run this script in 2 different ways:
 {b}python3 tester.py{e} {g}b{e} -> this will do some tests with your checker
 {b}python3 tester.py{e} {g}a{e} -> this will do both m and b
 {b}python3 tester.py{e} {g}[number_of_tests] [length_of_stack]{e}"""); exit(0)
-    elif (len(argv) == 2):
+    if (not access(P, X_OK)): print(f"{b}Error{e}\n{r}[{P[2:]}] executable must be present in this dir and must have permissions{e}"); exit(1)
+    if (not access(C, X_OK)): print(f"{b}Error{e}\n{r}[{C[2:]}] executable must be present in this dir and must have permissions{e}"); exit(1)
+    if (len(argv) == 2):
         if (argv[1] == 'm'):
             ft_check_m()
         elif (argv[1] == 'b'):
