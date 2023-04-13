@@ -30,6 +30,6 @@ You can run this tester in 4 different ways.
 #### Pro tip
 
 If you want to launch the tester with a particular checker executable you can
-add the path of the executable to tester.py flags like:
+add the path of the executable as second or third flag when running the tester:
 
 ```python3 tester.py m [path_to_the_checker_you_want_to_use]```
