@@ -1,6 +1,7 @@
 # Aldisti
 checker
 push_swap
+data.trace
 
 # Prerequisites
 *.d
