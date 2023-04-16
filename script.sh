@@ -220,32 +220,41 @@ ft_check_bonus()
 	echo "$PURPLE Tests: $BLUE$tests$PURPLE ok: $GREEN$ok$PURPLE ko: $RED$ko$RESET"
 }
 
-# blue       cyan       yellow      orange      red
-# 38;5;21    38;5;81    38;5;226    38;5;202    38;5;124
+ft_check_custom()
+{
+	local stack_size=$1
+	local test=$2
 
-# set colors
-BLUE="\033[38;5;21m"
-CYAN="\033[38;5;81m"
-GREEN="\033[38;5;40m"
-ORANGE="\033[38;5;202m"
-PURPLE="\033[38;5;105m"
-RED="\033[38;5;124m"
-WHITE="\033[38;5;231m"
-YELLOW="\033[38;5;226m"
-RESET="\033[0m"
-
-P="./../push_swap"
-MC="\033[37m"
-
-# set checker name
-if [ $(uname) = "Linux" ]
-then
-	C="./checker_linux"
-else
-	C="./checker_Mac"
-fi
-
-CP="./../checker"
+	tests=0
+	ok=0
+	ko=0
+	max=0
+	rm data.log
+	for _ in $(seq 1 $test)
+	do
+		abc=$(shuf -i 0-200000000 -n $stack_size)
+		echo "$abc\n" >> data.log
+		output=$($P $abc | $C $abc)
+		tests=$((tests + 1))
+		if [ $output = "OK" ]
+		then
+			ok=$((ok + 1))
+			move=$($P $entries | wc -l)
+			if [ $move -gt $max ]
+			then
+				max=$move
+			fi
+		elif [ $output = "KO" ]
+		then
+			ko=$((ko + 1))
+		fi
+	done
+	if [ $ok -eq $tests ]
+	then
+		ft_set_color $stack_size $max
+	fi
+	echo "$PURPLE Tests: $BLUE$tests$RESET$PURPLE Size: $CYAN$stack_size$RESET$PURPLE	OK: $MC$ok$RESET$PURPLE KO: $RED$ko$PURPLE Max: $WHITE$max$RESET"
+}
 
 ft_check_executables()
 {
@@ -284,6 +293,33 @@ ft_check_executables()
 		exit 1
 	fi
 }
+
+# blue       cyan       yellow      orange      red
+# 38;5;21    38;5;81    38;5;226    38;5;202    38;5;124
+
+# set colors
+BLUE="\033[38;5;21m"
+CYAN="\033[38;5;81m"
+GREEN="\033[38;5;40m"
+ORANGE="\033[38;5;202m"
+PURPLE="\033[38;5;105m"
+RED="\033[38;5;124m"
+WHITE="\033[38;5;231m"
+YELLOW="\033[38;5;226m"
+RESET="\033[0m"
+
+P="./../push_swap"
+MC="\033[37m"
+
+# set checker name
+if [ $(uname) = "Linux" ]
+then
+	C="./checker_linux"
+else
+	C="./checker_Mac"
+fi
+
+CP="./../checker"
 
 # check flags
 case $1 in
@@ -332,11 +368,40 @@ case $1 in
 	;;
 	-p)
 		shift
+		if [ $1 = "" ] || [ $2 = "" ]
+		then
+			echo "You have to insert 2 arguments"
+			echo "Command sould be of this type:"
+			echo "./script.sh -p [stack_size] [number_of_tests]"
+			exit 1
+		fi
+		[ -n "$1" ] && [ "$1" -eq "$1" ] 2>/dev/null
+		if ! [ $? -eq 0 ]
+		then
+			echo "Input arguments must be integers"
+			exit 1
+		fi
+		[ -n "$2" ] && [ "$2" -eq "$2" ] 2>/dev/null
+		if ! [ $? -eq 0 ]
+		then
+			echo "Input arguments must be integers"
+			exit 1
+		fi
 		# do custom
+		ft_check_custom $1 $2
 	;;
 	-*)
 		echo "'$1': invalid option"
-		echo "Try with './script.sh -h, --help' for more information"
+		echo "Try with './script.sh --help' for more information"
+		exit 1
+	;;
+	"")
+		echo "Try with './script.sh --help' for more information"
+		exit 1
+	;;
+	*)
+		echo "'$1': bad argument"
+		echo "Try with './script.sh --help' for more information"
 		exit 1
 	;;
 esac
