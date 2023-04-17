@@ -65,6 +65,11 @@ the output you'd get should be like this:
   -h, --help	display this help and exit
 ```
 
+now if you want to test the mandatory part of the project just run:
+```bash
+./tester -m
+```
+
 ## Bug report
 
 If you find some bugs or errors of any type, please, report them to me. You can
