@@ -265,12 +265,22 @@ ft_check_executables()
 		exit 1
 	fi
 	# check executables permissions
-	if ! [ $(stat -c %A $P | tr -cd x | wc -c) -eq 3 ]
+	if ! [ $(stat -c %A $P | tr -cd x | wc -c) -eq 3 ] && [ "$(uname)" = "Linux" ]
 	then
 		echo "'$P' executable must have execution permissions"
 		echo "Try with 'chmod +x $P'"
 		exit 1
-	elif ! [ $(stat -c %A $C | tr -cd x | wc -c) -eq 3 ]
+	elif ! [ $(stat $P | awk '{print $3}' | tr -cd x | wc -c) -eq 3 ] && ! [ "$(uname)" = "Linux" ]
+	then
+		echo "'$P' executable must have execution permissions"
+		echo "Try with 'chmod +x $P'"
+		exit 1
+	elif ! [ $(stat -c %A $C | tr -cd x | wc -c) -eq 3 ] && [ "$(uname)" = "Linux" ]
+	then
+		echo "'$C' executable must have execution permissions"
+		echo "Try with 'chmod +x $C'"
+		exit 1
+	elif ! [ $(stat $C | awk '{print $3}' | tr -cd x | wc -c) -eq 3 ] && ! [ "$(uname)" = "Linux" ]
 	then
 		echo "'$C' executable must have execution permissions"
 		echo "Try with 'chmod +x $C'"
