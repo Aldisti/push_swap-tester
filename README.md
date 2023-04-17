@@ -5,16 +5,22 @@
 First, go to the root of your repository (which is where you can find your
 Makefile) and do:
 
-```git clone https://github.com/Aldisti/push_swap_tester.git```
+```bash
+git clone https://github.com/Aldisti/push_swap_tester.git
+```
 
 after this you have to compile your push_swap and if you have done the bonus
 part then you have to compile it too. If your Makefile is correct you can do:
 
-```make all```
+```bash
+make all
+```
 
 next just go inside the tester folder with this command:
 
-```cd push_swap_tester```
+```bash
+cd push_swap_tester
+```
 
 now you can test your push_swap with 2 different scripts, one is wrote in
 python and the other one is in bash. Enjoy the test...
