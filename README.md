@@ -67,8 +67,7 @@ the output you'd get should be like this:
 
 now if you want to test the mandatory part of the project just run:
 ```bash
-./tester -m
-```
+./tester -m ```
 
 ## Bug report
 
