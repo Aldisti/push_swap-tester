@@ -39,7 +39,7 @@ You can run this tester in 4 different ways.
 4) to do a custom number of tests with a custom stack size do:
 ```python3 tester.py [how_many_tests] [stack_size]```
 
-#### Pro tip
+##### Pro tip
 
 If you want to launch the tester with a particular checker executable you can
 add the path of the executable as second or third flag when running the tester:
