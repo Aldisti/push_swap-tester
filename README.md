@@ -72,7 +72,9 @@ now if you want to test the mandatory part of the project just run:
 
 it's the same with the options 'b' and 'a', but if you want to do a custom test
 you can use the option 'p' with 2 arguments: the stack size and the number of
-tests that you want to do. e.g. if you want to do 15 tests for 500 numbers you
+tests that you want to do.
+
+e.g. if you want to do 15 tests for 500 numbers you
 can do:
 
 ```bash
