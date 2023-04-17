@@ -334,40 +334,41 @@ CP="./../checker"
 case $1 in
 	-h|--help)
 		echo "DESCRIPTION"
-		echo "  -m		check the mandatory part"
-		echo "  -b		check the bonus part"
-		echo "  -a		check both, mandatory and bonus"
-		echo "  -p		allow you to do custom tests"
+		echo " ./tester m	checks for the mandatory part"
+		echo " ./tester b	checks for the bonus part"
+		echo " ./tester a	checks for both, mandatory and bonus"
+		echo " ./tester c	allows you to do custom tests"
+		echo " ./tester r	allows you to do custom tests in a range of numbers"
 		echo "  -h, --help	display this help and exit"
 		exit 0
 	;;
-	-m)
+	m)
 		shift
 		if ! [ $# -eq 0 ]
 		then
-			echo "'-m' option doesn't expect any arguments"
+			echo "'m' option doesn't expect any arguments"
 			exit 1
 		fi
 		ft_check_executables 1
 		# do mandatory
 		ft_check_mandatory
 	;;
-	-b)
+	b)
 		shift
 		if ! [ $# -eq 0 ]
 		then
-			echo "'-b' option doesn't expect any arguments"
+			echo "'b' option doesn't expect any arguments"
 			exit 1
 		fi
 		ft_check_executables 2
 		# do bonus
 		ft_check_bonus
 	;;
-	-a)
+	a)
 		shift
 		if ! [ $# -eq 0 ]
 		then
-			echo "'-a' option doesn't expect any arguments"
+			echo "'a' option doesn't expect any arguments"
 			exit 1
 		fi
 		# do both
@@ -375,18 +376,18 @@ case $1 in
 		ft_check_mandatory
 		ft_check_bonus
 	;;
-	-p)
+	c)
 		shift
 		if ! [ $# -eq 2 ]
 		then
-			echo "'-p' option expects only 2 arguments"
+			echo "'c' option expects only 2 arguments"
 			exit 1
 		fi
 		if [ "$1" = "" ] || [ "$2" = "" ]
 		then
 			echo "You have to insert 2 numbers as argument"
 			echo "Command sould be of this type:"
-			echo "./tester -p [stack_size] [number_of_tests]"
+			echo "./tester c [stack_size] [number_of_tests]"
 			exit 1
 		fi
 		[ -n "$1" ] && [ "$1" -eq "$1" ] 2>/dev/null

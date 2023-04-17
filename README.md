@@ -64,16 +64,17 @@ are 4 different options. You can see them doing:
 
 the output you'd get should be like this:
 ```
-  -m		check the mandatory part
-  -b		check the bonus part
-  -a		check both, mandatory and bonus
-  -p		allow you to do custom tests
+ ./tester m	checks for the mandatory part
+ ./tester b	checks for the bonus part
+ ./tester a	checks for both, mandatory and bonus
+ ./tester c	allows you to do custom tests
+ ./tester r	allows you to do custom tests in a range of numbers
   -h, --help	display this help and exit
 ```
 
 now if you want to test the mandatory part of the project just run:
 ```bash
-./tester -m
+./tester m
 ```
 
 it's the same with the options 'b' and 'a', but if you want to do a custom test
@@ -83,15 +84,16 @@ tests that you want to do.
 e.g. if you want to do 15 tests for 500 numbers you can do:
 
 ```bash
-./tester -p 500 15
+./tester p 500 15
 ```
 
 #### Output
 
 After running the test you'll get an output like this:
 ```Tests: 15 Size: 500	OK: 15 KO: 0```
-Se tutti i test saranno ok allora il numero degli 'OK' sarà colorato in base
-al numero massimo di mosse fatte rispetto all'evaluation sheet.
+If all tests are ok then the number after 'OK:' will be colored accordingly
+to the maximum number of moves made (the grade will be based on the evaluation
+sheet).
 
 Colors table:
 
