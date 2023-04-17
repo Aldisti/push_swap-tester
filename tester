@@ -366,7 +366,7 @@ case $1 in
 		then
 			echo "You have to insert 2 numbers as argument"
 			echo "Command sould be of this type:"
-			echo "./script.sh -p [stack_size] [number_of_tests]"
+			echo "./tester -p [stack_size] [number_of_tests]"
 			exit 1
 		fi
 		[ -n "$1" ] && [ "$1" -eq "$1" ] 2>/dev/null
@@ -386,16 +386,16 @@ case $1 in
 	;;
 	-*)
 		echo "'$1': invalid option"
-		echo "Try with './script.sh --help' for more information"
+		echo "Try with './tester --help' for more information"
 		exit 1
 	;;
 	"")
-		echo "Try with './script.sh --help' for more information"
+		echo "Try with './tester --help' for more information"
 		exit 1
 	;;
 	*)
 		echo "'$1': bad argument"
-		echo "Try with './script.sh --help' for more information"
+		echo "Try with './tester --help' for more information"
 		exit 1
 	;;
 esac
