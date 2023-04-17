@@ -80,8 +80,7 @@ it's the same with the options 'b' and 'a', but if you want to do a custom test
 you can use the option 'p' with 2 arguments: the stack size and the number of
 tests that you want to do.
 
-e.g. if you want to do 15 tests for 500 numbers you
-can do:
+e.g. if you want to do 15 tests for 500 numbers you can do:
 
 ```bash
 ./tester -p 500 15
@@ -90,7 +89,19 @@ can do:
 #### Output
 
 After running the test you'll get an output like this:
-```Tests: 15 Size: 500	OK: 15 KO: 0```.
+```Tests: 15 Size: 500	OK: 15 KO: 0```
+Se tutti i test saranno ok allora il numero degli 'OK' sarà colorato in base
+al numero massimo di mosse fatte rispetto all'evaluation sheet.
+
+Colors table:
+
+```
+\033[31mGREEN\033[0m == grade 5/5
+CYAN == grade 4/5
+YELLOW == grade 3/5
+ORANGE == grade 2/5
+RED == grade 1/5
+```
 
 ## Bug report
 
