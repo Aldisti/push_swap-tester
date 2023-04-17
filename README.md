@@ -87,6 +87,11 @@ can do:
 ./tester -p 500 15
 ```
 
+#### Output
+
+After running the test you'll get an output like this:
+```Tests: 15 Size: 500	OK: 15 KO: 0```.
+
 ## Bug report
 
 If you find some bugs or errors of any type, please, report them to me. You can

@@ -242,7 +242,7 @@ ft_check_custom()
 	then
 		ft_set_color $stack_size $max
 	fi
-	echo "$PURPLE Tests: $BLUE$tests$RESET$PURPLE Size: $CYAN$stack_size$RESET$PURPLE	OK: $MC$ok$RESET$PURPLE KO: $RED$ko$PURPLE Max: $WHITE$max$RESET"
+	echo "$PURPLE Tests: $BLUE$tests$RESET$PURPLE Size: $CYAN$stack_size$RESET$PURPLE	OK: $MC$ok$RESET$PURPLE KO: $RED$ko$PURPLE Max: $MC$max$RESET"
 }
 
 ft_check_executables()
