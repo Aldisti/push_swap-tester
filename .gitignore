@@ -2,6 +2,7 @@
 checker
 push_swap
 data.trace
+*.log
 
 # Prerequisites
 *.d
