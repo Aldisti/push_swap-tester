@@ -96,11 +96,11 @@ al numero massimo di mosse fatte rispetto all'evaluation sheet.
 Colors table:
 
 ```
-🟩GREEN == grade 5/5
-🟦CYAN == grade 4/5
-🟨YELLOW == grade 3/5
-🟧ORANGE == grade 2/5
-🟥RED == grade 1/5
+🟩 is for grade 5/5
+🟦 is for grade 4/5
+🟨 is for grade 3/5
+🟧 is for grade 2/5
+🟥 is for grade 1/5
 ```
 
 ## Bug report
