@@ -44,7 +44,12 @@ ft_check_mandatory()
 		max=0
 		for _ in $(seq 1 15)
 		do
-			abc=$(shuf -i 0-200000000 -n $i)
+			if [ "$(uname)" = "Linux" ]
+			then
+				abc=$(shuf -i 0-200000000 -n $i)
+			else
+				abc=$(python3 generator.py $i)
+			fi
 			output=$($P $abc | $C $abc)
 			tests=$((tests + 1))
 			if [ $output = "OK" ]
@@ -221,7 +226,12 @@ ft_check_custom()
 	rm data.log 2>/dev/null
 	for _ in $(seq 1 $test)
 	do
-		abc=$(shuf -i 0-200000000 -n $stack_size)
+		if [ "$(uname)" = "Linux" ]
+		then
+			abc=$(shuf -i 0-200000000 -n $stack_size)
+		else
+			abc=$(python3 generator.py $i)
+		fi
 		echo "$abc\n" >> data.log
 		output=$($P $abc | $C $abc)
 		tests=$((tests + 1))
