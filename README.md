@@ -19,7 +19,9 @@ next just go inside the tester folder with this command:
 now you can test your push_swap with 2 different scripts, one is wrote in
 python and the other one is in bash. Enjoy the test...
 
-### tester.py usage
+## Usage
+
+### tester.py
 
 The python script will no longer be updated so I suggest you to use the bash
 script. But I'll leave you a little guide on how to use it, for more info
@@ -44,7 +46,7 @@ add the path of the executable as second or third flag when running the tester:
 
 ```python3 tester.py m [path_to_the_checker_you_want_to_use]```
 
-### tester usage
+### tester
 
 The bash script is an executable file, so you can run it just by typing
 ```./tester```. But to use it you have to add an option, at the moment there
@@ -62,8 +64,6 @@ the output you'd get should be like this:
   -p		allow you to do custom tests
   -h, --help	display this help and exit
 ```
-
-
 
 ## Bug report
 
