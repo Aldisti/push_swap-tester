@@ -34,17 +34,6 @@ ft_set_color()
 	fi
 }
 
-ft_check()
-{
-	# set local variables
-	local size=$1
-	local moves=""
-
-	entries=$(shuf -i 0-200000000 -n $size)
-	output=$($P $entries | $C $entries)
-
-}
-
 ft_check_mandatory()
 {
 	for i in 3 5 100 500
@@ -229,7 +218,7 @@ ft_check_custom()
 	ok=0
 	ko=0
 	max=0
-	rm data.log
+	rm data.log 2>/dev/null
 	for _ in $(seq 1 $test)
 	do
 		abc=$(shuf -i 0-200000000 -n $stack_size)
@@ -239,7 +228,7 @@ ft_check_custom()
 		if [ $output = "OK" ]
 		then
 			ok=$((ok + 1))
-			move=$($P $entries | wc -l)
+			move=$($P $abc | wc -l)
 			if [ $move -gt $max ]
 			then
 				max=$move
@@ -368,9 +357,14 @@ case $1 in
 	;;
 	-p)
 		shift
-		if [ $1 = "" ] || [ $2 = "" ]
+		if ! [ $# -eq 2 ]
 		then
-			echo "You have to insert 2 arguments"
+			echo "'-p' option expects only 2 arguments"
+			exit 1
+		fi
+		if [ "$1" = "" ] || [ "$2" = "" ]
+		then
+			echo "You have to insert 2 numbers as argument"
 			echo "Command sould be of this type:"
 			echo "./script.sh -p [stack_size] [number_of_tests]"
 			exit 1
@@ -405,19 +399,3 @@ case $1 in
 		exit 1
 	;;
 esac
-
-# if [ $AC -eq 2 ]
-# then
-# 	for test in $(seq 1 $TESTS)
-# 	do
-# 		ft_check $STACK
-# 	done
-# else
-# 	for stack_size in $(seq $STACK_START $STACK_END)
-# 	do
-# 		for test in $(seq 1 $TESTS)
-# 		do
-# 			ft_check $stack_size
-# 		done
-# 	done
-# fi
