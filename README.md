@@ -55,7 +55,7 @@ are 4 different options. You can see them doing:
 ```
 
 the output you'd get should be like this:
-``` bash
+```
   -m		check the mandatory part
   -b		check the bonus part
   -a		check both, mandatory and bonus
