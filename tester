@@ -79,13 +79,13 @@ ft_check_mandatory()
 		then
 			ft_set_color $i $max
 		fi
-		echo -n "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$i$RESET$PURPLE	OK: $MC$ok$RESET"
 		if [ $ko -gt 0 ]
 		then
-			echo "$PURPLE KO: $RED$ko$RESET"
+			ko="$PURPLE KO: $RED$ko$RESET"
 		else
-			echo ""
+			ko=""
 		fi
+		echo "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$i$RESET$PURPLE	OK: $MC$ok$RESET$ko"
 	done
 }
 
@@ -248,7 +248,7 @@ ft_check_custom()
 	rm data.log 2>/dev/null
 	for _ in $(seq 1 $test)
 	do
-		abc=$(python3 generator.py $i)
+		abc=$(python3 generator.py $stack_size)
 		echo "$abc\n" >> data.log
 		output=$($P $abc | $C $abc)
 		tests=$((tests + 1))
@@ -269,7 +269,13 @@ ft_check_custom()
 	then
 		ft_set_color $stack_size $max
 	fi
-	echo "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$stack_size$RESET$PURPLE	OK: $MC$ok$RESET$PURPLE KO: $RED$ko$PURPLE Max: $MC$max$RESET"
+	if [ $ko -gt 0 ]
+		then
+			ko="$PURPLE KO: $RED$ko$RESET"
+		else
+			ko=""
+		fi
+	echo "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$stack_size$RESET$PURPLE	OK: $MC$ok$RESET$ko$PURPLE Max: $MC$max$RESET"
 }
 
 ft_check_executables()
