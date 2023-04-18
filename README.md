@@ -22,37 +22,10 @@ next just go inside the tester folder with this command:
 cd push_swap_tester
 ```
 
-now you can test your push_swap with 2 different scripts, one is wrote in
-python and the other one is in bash. Enjoy the test...
+now you can test your push_swap with a bash script, it's easy to use so don't
+be scared by this long README. Enjoy the tester!
 
 ## Usage
-
-### tester.py
-
-The python script will no longer be updated so I suggest you to use the bash
-script. But I'll leave you a little guide on how to use it, for more info
-just run:
-
-```python3 tester.py```
-
-You can run this tester in 4 different ways.
-1) to check if your push_swap works correctly do:
-```python3 tester.py m```
-2) to check if your checker works correctly do:
-```python3 tester.py b```
-3) to check both just do:
-```python3 tester.py a```
-4) to do a custom number of tests with a custom stack size do:
-```python3 tester.py [how_many_tests] [stack_size]```
-
-##### Pro tip
-
-If you want to launch the tester with a particular checker executable you can
-add the path of the executable as second or third flag when running the tester:
-
-```python3 tester.py m [path_to_the_checker_you_want_to_use]```
-
-### tester
 
 The bash script is an executable file, so you can run it just by typing
 ```./tester```. But to use it you have to add an option, at the moment there
