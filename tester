@@ -353,6 +353,23 @@ fi
 
 CP="./../checker"
 
+name=$(ps -p $$ -o command | tail -1 | awk '{print $1}')
+slashes=$(($(echo $name | tr -cd / | wc -c | awk '{print $1}') + 1))
+name=$(echo $name | cut -d/ -f $slashes)
+if [ $name = "bash" ]
+then
+	BLUE="\e[38;5;21m"
+	CYAN="\e[38;5;81m"
+	GREEN="\e[38;5;40m"
+	ORANGE="\e[38;5;202m"
+	PURPLE="\e[38;5;105m"
+	RED="\e[38;5;124m"
+	WHITE="\e[38;5;231m"
+	YELLOW="\e[38;5;226m"
+	RESET="\e[0m"
+	MC="\e[37m"
+fi
+
 # check flags
 case $1 in
 	-h|--help)
