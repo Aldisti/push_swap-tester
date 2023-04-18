@@ -358,16 +358,16 @@ slashes=$(($(echo $name | tr -cd / | wc -c | awk '{print $1}') + 1))
 name=$(echo $name | cut -d/ -f $slashes)
 if [ $name = "bash" ]
 then
-	BLUE="\u001b[38;5;21m"
-	CYAN="\u001b[38;5;81m"
-	GREEN="\u001b[38;5;40m"
-	ORANGE="\u001b[38;5;202m"
-	PURPLE="\u001b[38;5;105m"
-	RED="\u001b[38;5;124m"
-	WHITE="\u001b[38;5;231m"
-	YELLOW="\u001b[38;5;226m"
-	RESET="\u001b[0m"
-	MC="\u001b[37m"
+	BLUE=""
+	CYAN=""
+	GREEN=""
+	ORANGE=""
+	PURPLE=""
+	RED=""
+	WHITE=""
+	YELLOW=""
+	RESET=""
+	MC=""
 fi
 
 # check flags
