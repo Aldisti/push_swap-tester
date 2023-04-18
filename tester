@@ -65,7 +65,7 @@ ft_check_mandatory()
 			if [ $output = "OK" ]
 			then
 				ok=$((ok + 1))
-				moves=$($P $entries | wc -l)
+				moves=$($P $abc | wc -l | awk '{print $1}')
 				if [ $moves -gt $max ]
 				then
 					max=$moves
@@ -255,7 +255,7 @@ ft_check_custom()
 		if [ $output = "OK" ]
 		then
 			ok=$((ok + 1))
-			move=$($P $abc | wc -l)
+			move=$($P $abc | wc -l | awk '{print $1}')
 			if [ $move -gt $max ]
 			then
 				max=$move
