@@ -37,58 +37,6 @@ ft_set_color()
 	fi
 }
 
-ft_check_mandatory()
-{
-	for i in 3 5 100 500
-	do
-		tests=0
-		ok=0
-		ko=0
-		max=0
-		if [ $i -eq 3 ]
-		then
-			nums=15
-		elif [ $i -eq 5 ]
-		then
-			nums=50
-		elif [ $i -eq 100 ]
-		then
-			nums=25
-		else
-			nums=10
-		fi
-		for _ in $(seq 1 $nums)
-		do
-			abc=$(python3 generator.py $i)
-			output=$($P $abc | $C $abc)
-			tests=$((tests + 1))
-			if [ $output = "OK" ]
-			then
-				ok=$((ok + 1))
-				moves=$($P $abc | wc -l | awk '{print $1}')
-				if [ $moves -gt $max ]
-				then
-					max=$moves
-				fi
-			elif [ $output = "KO" ]
-			then
-				ko=$((ko + 1))
-			fi
-		done
-		if [ $ok -eq $tests ]
-		then
-			ft_set_color $i $max
-		fi
-		if [ $ko -gt 0 ]
-		then
-			ko="$PURPLE KO: $RED$ko$RESET"
-		else
-			ko=""
-		fi
-		echo "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$i$RESET$PURPLE	OK: $MC$ok$RESET$ko"
-	done
-}
-
 ft_check_bonus()
 {
 	local tests=0
@@ -236,6 +184,58 @@ ft_check_bonus()
 	fi
 }
 
+ft_check_mandatory()
+{
+	for i in 3 5 100 500
+	do
+		tests=0
+		ok=0
+		ko=0
+		max=0
+		if [ $i -eq 3 ]
+		then
+			nums=15
+		elif [ $i -eq 5 ]
+		then
+			nums=50
+		elif [ $i -eq 100 ]
+		then
+			nums=25
+		else
+			nums=10
+		fi
+		for _ in $(seq 1 $nums)
+		do
+			abc=$(python3 generator.py $i)
+			output=$($P $abc | $C $abc)
+			tests=$((tests + 1))
+			if [ $output = "OK" ]
+			then
+				ok=$((ok + 1))
+				moves=$($P $abc | wc -l | awk '{print $1}')
+				if [ $moves -gt $max ]
+				then
+					max=$moves
+				fi
+			elif [ $output = "KO" ]
+			then
+				ko=$((ko + 1))
+			fi
+		done
+		if [ $ok -eq $tests ]
+		then
+			ft_set_color $i $max
+		fi
+		if [ $ko -gt 0 ]
+		then
+			ko="$PURPLE KO: $RED$ko$RESET"
+		else
+			ko=""
+		fi
+		echo "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$i$RESET$PURPLE	OK: $MC$ok$RESET$ko"
+	done
+}
+
 ft_check_custom()
 {
 	local stack_size=$1
@@ -356,13 +356,39 @@ CP="./../checker"
 # check flags
 case $1 in
 	-h|--help)
-		echo "DESCRIPTION"
-		echo " ./tester m	checks for the mandatory part"
-		echo " ./tester b	checks for the bonus part"
-		echo " ./tester a	checks for both, mandatory and bonus"
-		echo " ./tester c	allows you to do custom tests"
-		echo " ./tester r	allows you to do custom tests in a range of numbers"
-		echo "  -h, --help	display this help and exit"
+		echo "PUSH_SWAP_TESTER"
+		echo "This is a simple script that tests your push_swap program."
+		echo "It's easy to use and works on Linux and MacOS."
+		echo ""
+		echo "OPTIONS"
+		echo " ./tester m	checks for the mandatory part."
+		echo " ./tester b	checks for the bonus part."
+		echo " ./tester a	checks for both, mandatory and bonus."
+		echo " ./tester c	allows you to do custom tests."
+		echo " ./tester r	allows you to do custom tests in a range of numbers."
+		echo "  -h, --help	display this help and exit."
+		echo ""
+		echo "OUTPUT"
+		echo "Tests: [1] Size: [2] OK: [3] KO: [4]"
+		echo "1) is the the numbers of tests executed."
+		echo "2) is the size of the stack used in those tests."
+		echo "3) is the number of the successfull tests and if you pass all of them then"
+		echo "     this number will be colored on the base of the evaluation sheet."
+		echo "4) is the number of the failed tests (if there aren't, you won't see this number)."
+		echo ""
+		echo "The colors that ok can be are these:"
+		echo "$RED RED$RESET	is for grade 1/5"
+		echo "$ORANGE ORANGE$RESET	is for grade 2/5"
+		echo "$YELLOW YELLOW$RESET	is for grade 3/5"
+		echo "$CYAN BLUE$RESET	is for grade 4/5"
+		echo "$GREEN GREEN$RESET	is for grade 5/5"
+		echo "$WHITE WHITE$RESET	is for everything that's not on the evaluation sheet."
+		echo ""
+		echo "AUTHOR"
+		echo "Written by adi-stef aka Aldisti."
+		echo ""
+		echo "REPORTING BUGS"
+		echo "To report bugs you can write me on slack: adi-stef."
 		exit 0
 	;;
 	m)
