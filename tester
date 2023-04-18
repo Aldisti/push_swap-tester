@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# How to generate an array of prandom numbers
+# abc=$(shuf -i 0-200000000 -n $how_many_numbers)
+
 # DESCRIPTION
 # this function changes the color of the number of moves
 ft_set_color()
@@ -42,14 +45,21 @@ ft_check_mandatory()
 		ok=0
 		ko=0
 		max=0
-		for _ in $(seq 1 15)
+		if [ $i -eq 3 ]
+		then
+			nums=15
+		elif [ $i -eq 5 ]
+		then
+			nums=50
+		elif [ $i -eq 100 ]
+		then
+			nums=25
+		else
+			nums=10
+		fi
+		for _ in $(seq 1 $nums)
 		do
-			if [ "$(uname)" = "Linux" ]
-			then
-				abc=$(shuf -i 0-200000000 -n $i)
-			else
-				abc=$(python3 generator.py $i)
-			fi
+			abc=$(python3 generator.py $i)
 			output=$($P $abc | $C $abc)
 			tests=$((tests + 1))
 			if [ $output = "OK" ]
@@ -69,7 +79,13 @@ ft_check_mandatory()
 		then
 			ft_set_color $i $max
 		fi
-		echo "$PURPLE Tests: $BLUE$tests$RESET$PURPLE Size: $CYAN$i$RESET$PURPLE	OK: $MC$ok$RESET$PURPLE KO: $RED$ko$RESET"
+		echo -n "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$i$RESET$PURPLE	OK: $MC$ok$RESET"
+		if [ $ko -gt 0 ]
+		then
+			echo "$PURPLE KO: $RED$ko$RESET"
+		else
+			echo ""
+		fi
 	done
 }
 
@@ -211,7 +227,13 @@ ft_check_bonus()
 		echo "$RED TEST 11 fail:$RESET '$P 3 1 2 4 6 5 7 8 9 | $CP 3 1 2 4 6 5 7 9 8'"
 	fi
 	tests=$((tests + 1))
-	echo "$PURPLE Tests: $BLUE$tests$PURPLE ok: $GREEN$ok$PURPLE ko: $RED$ko$RESET"
+	echo -n "$PURPLE Tests: $WHITE$tests$PURPLE ok: $GREEN$ok$RESET"
+	if [ $ko -gt 0 ]
+	then
+		echo "$PURPLE ko: $RED$ko$RESET"
+	else
+		echo ""
+	fi
 }
 
 ft_check_custom()
@@ -226,12 +248,7 @@ ft_check_custom()
 	rm data.log 2>/dev/null
 	for _ in $(seq 1 $test)
 	do
-		if [ "$(uname)" = "Linux" ]
-		then
-			abc=$(shuf -i 0-200000000 -n $stack_size)
-		else
-			abc=$(python3 generator.py $i)
-		fi
+		abc=$(python3 generator.py $i)
 		echo "$abc\n" >> data.log
 		output=$($P $abc | $C $abc)
 		tests=$((tests + 1))
@@ -252,7 +269,7 @@ ft_check_custom()
 	then
 		ft_set_color $stack_size $max
 	fi
-	echo "$PURPLE Tests: $BLUE$tests$RESET$PURPLE Size: $CYAN$stack_size$RESET$PURPLE	OK: $MC$ok$RESET$PURPLE KO: $RED$ko$PURPLE Max: $MC$max$RESET"
+	echo "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$stack_size$RESET$PURPLE	OK: $MC$ok$RESET$PURPLE KO: $RED$ko$PURPLE Max: $MC$max$RESET"
 }
 
 ft_check_executables()
@@ -404,6 +421,20 @@ case $1 in
 		fi
 		# do custom
 		ft_check_custom $1 $2
+	;;
+	l)
+		shift
+		if ! [ $# -eq 0 ]
+		then
+			echo "'l' option doesn't expect any arguments"
+			exit 1
+		fi
+		echo "$RED RED$RESET	is for grade 1/5"
+		echo "$ORANGE ORANGE$RESET	is for grade 2/5"
+		echo "$YELLOW YELLOW$RESET	is for grade 3/5"
+		echo "$CYAN BLUE$RESET	is for grade 4/5"
+		echo "$GREEN GREEN$RESET	is for grade 5/5"
+		exit 0
 	;;
 	-*)
 		echo "'$1': invalid option"
