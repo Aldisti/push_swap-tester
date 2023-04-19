@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# TO DO
+# salvare bene le 'abc'
+
 # How to generate an array of prandom numbers
 # abc=$(shuf -i 0-200000000 -n $how_many_numbers)
 
@@ -207,6 +210,7 @@ ft_check_mandatory()
 		for _ in $(seq 1 $nums)
 		do
 			abc=$(python3 generator.py $i)
+			echo "$abc\n" >> data.log
 			output=$($P $abc | $C $abc)
 			tests=$((tests + 1))
 			if [ $output = "OK" ]
@@ -276,6 +280,18 @@ ft_check_custom()
 			ko=""
 		fi
 	echo "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$stack_size$RESET$PURPLE	OK: $MC$ok$RESET$ko$PURPLE Max: $MC$max$RESET"
+}
+
+ft_check_range ()
+{
+	local start=$1
+	local end=$2
+	local tests=$3
+
+	for size in $(seq $start $end)
+	do
+		ft_check_custom $size $tests
+	done
 }
 
 ft_check_executables()
@@ -394,12 +410,12 @@ case $1 in
 		echo "4) is the number of the failed tests (if there aren't, you won't see this number)."
 		echo ""
 		echo "The colors that ok can be are these:"
-		echo "$RED RED$RESET	is for grade 1/5"
-		echo "$ORANGE ORANGE$RESET	is for grade 2/5"
-		echo "$YELLOW YELLOW$RESET	is for grade 3/5"
-		echo "$CYAN BLUE$RESET	is for grade 4/5"
-		echo "$GREEN GREEN$RESET	is for grade 5/5"
-		echo "$WHITE WHITE$RESET	is for everything that's not on the evaluation sheet."
+		echo "$RED RED$RESET	it's for grade 1/5"
+		echo "$ORANGE ORANGE$RESET	it's for grade 2/5"
+		echo "$YELLOW YELLOW$RESET	it's for grade 3/5"
+		echo "$CYAN BLUE$RESET	it's for grade 4/5"
+		echo "$GREEN GREEN$RESET	it's for grade 5/5"
+		echo "$WHITE WHITE$RESET	it's for everything that's not on the evaluation sheet."
 		echo ""
 		echo "EXAMPLES"
 		echo "./tester c 500 30"
@@ -472,8 +488,53 @@ case $1 in
 			echo "Input arguments must be integers"
 			exit 1
 		fi
+		if [ $1 -lt 0 ] || [ $2 -lt 0 ]
+		then
+			echo "Input arguments must be greater than zero"
+			exit 1
+		fi
 		# do custom
 		ft_check_custom $1 $2
+	;;
+	r)
+		shift
+		if ! [ $# -eq 3 ]
+		then
+			echo "'r' option expects only 2 arguments"
+			exit 1
+		fi
+		if [ "$1" = "" ] || [ "$2" = "" ] || [ "$3" = "" ]
+		then
+			echo "You have to insert 2 numbers as argument"
+			echo "Command sould be of this type:"
+			echo "./tester r [stack_size] [number_of_tests]"
+			exit 1
+		fi
+		[ -n "$1" ] && [ "$1" -eq "$1" ] 2>/dev/null
+		if ! [ $? -eq 0 ]
+		then
+			echo "Input arguments must be integers"
+			exit 1
+		fi
+		[ -n "$2" ] && [ "$2" -eq "$2" ] 2>/dev/null
+		if ! [ $? -eq 0 ]
+		then
+			echo "Input arguments must be integers"
+			exit 1
+		fi
+		[ -n "$3" ] && [ "$3" -eq "$3" ] 2>/dev/null
+		if ! [ $? -eq 0 ]
+		then
+			echo "Input arguments must be integers"
+			exit 1
+		fi
+		if [ $1 -lt 0 ] || [ $2 -lt 0 ] || [ $3 -lt 0 ]
+		then
+			echo "Input arguments must be greater than zero"
+			exit 1
+		fi
+		# do custom range
+		ft_check_range $1 $2 $3
 	;;
 	l)
 		shift
