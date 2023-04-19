@@ -423,7 +423,7 @@ case $1 in
 		echo "	$PURPLE Tests:$WHITE 30$PURPLE Size:$CYAN 500$PURPLE	OK:$YELLOW 30$PURPLE Max:$YELLOW 8643$RESET"
 		echo ""
 		echo "AUTHOR"
-		echo "Written by adi-stef aka Aldisti."
+		echo "Written by adi-stef aka Aldisti <https://github.com/Aldisti>."
 		echo ""
 		echo "REPORTING BUGS"
 		echo "To report bugs you can write me on slack: adi-stef."
