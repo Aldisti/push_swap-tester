@@ -1,6 +1,7 @@
 # Aldisti
 checker
 push_swap
+*.log
 
 # Prerequisites
 *.d
