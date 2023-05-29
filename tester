@@ -49,141 +49,141 @@ ft_check_bonus()
 	#	TEST 1
 	out1=$($C ciao come stai > out.log 2>&1; cat out.log)
 	out2=$($CP ciao come stai > out.log 2>&1; cat out.log | head -c 5)
-	if [ $out1 = $out2 ]
+	if [ "$out1" = "$out2" ]
 	then
 		ok=$((ok + 1))
 		rm out.log
 	else
 		ko=$((ko + 1))
-		echo "$RED TEST 1 fail:$RESET '$CP ciao come stai'"
+		printf "$RED TEST 1 fail:$RESET '$CP ciao come stai'\n"
 	fi
 	tests=$((tests + 1))
 	#	TEST 2
 	out1=$($C 1 2 3 "4 1 6" > out.log 2>&1; cat out.log)
 	out2=$($CP 1 2 3 "4 1 6" > out.log 2>&1; cat out.log | head -c 5)
-	if [ $out1 = $out2 ]
+	if [ "$out1" = "$out2" ]
 	then
 		ok=$((ok + 1))
 		rm out.log
 	else
 		ko=$((ko + 1))
-		echo "$RED TEST 2 fail:$RESET '$CP 1 2 3 "4 1 6"'"
+		printf "$RED TEST 2 fail:$RESET '$CP 1 2 3 \"4 1 6\"'\n"
 	fi
 	tests=$((tests + 1))
 	#	TEST 3
 	out1=$(echo "ra" | $C 3 1 2 > out.log 2>&1; cat out.log)
 	out2=$(echo "ra" | $CP 3 1 2 > out.log 2>&1; cat out.log | head -c 5)
-	if [ $out1 = $out2 ]
+	if [ "$out1" = "$out2" ]
 	then
 		ok=$((ok + 1))
 		rm out.log
 	else
 		ko=$((ko + 1))
-		echo "$RED TEST 3 fail:$RESET 'echo "ra" | $CP 3 1 2'"
+		printf "$RED TEST 3 fail:$RESET 'echo "ra" | $CP 3 1 2'\n"
 	fi
 	tests=$((tests + 1))
 	#	TEST 4
 	out1=$(echo "sa" | $C 3 1 2 > out.log 2>&1; cat out.log)
 	out2=$(echo "sa" | $CP 3 1 2 > out.log 2>&1; cat out.log | head -c 5)
-	if [ $out1 = $out2 ]
+	if [ "$out1" = "$out2" ]
 	then
 		ok=$((ok + 1))
 		rm out.log
 	else
 		ko=$((ko + 1))
-		echo "$RED TEST 4 fail:$RESET '"sa" | $CP 3 1 2'"
+		printf "$RED TEST 4 fail:$RESET '"sa" | $CP 3 1 2'\n"
 	fi
 	tests=$((tests + 1))
 	#	TEST 5
 	out1=$($C > out.log 2>&1; cat out.log)
 	out2=$($CP > out.log 2>&1; cat out.log | head -c 5)
-	if [ $out1 = $out2 ]
+	if [ "$out1" = "$out2" ]
 	then
 		ok=$((ok + 1))
 		rm out.log
 	else
 		ko=$((ko + 1))
-		echo "$RED TEST 5 fail:$RESET '$CP'"
+		printf "$RED TEST 5 fail:$RESET '$CP'\n"
 	fi
 	tests=$((tests + 1))
 	#	TEST 6
-	out1=$(echo -n "" | $C 1 2 3 > out.log 2>&1; cat out.log)
-	out2=$(echo -n "" | $CP 1 2 3 > out.log 2>&1; cat out.log | head -c 5)
-	if [ $out1 = $out2 ]
+	out1=$(printf "" | $C 1 2 3 > out.log 2>&1; cat out.log)
+	out2=$(printf "" | $CP 1 2 3 > out.log 2>&1; cat out.log | head -c 5)
+	if [ "$out1" = "$out2" ]
 	then
 		ok=$((ok + 1))
 		rm out.log
 	else
 		ko=$((ko + 1))
-		echo "$RED TEST 6 fail:$RESET 'echo -n \"\" | $CP 1 2 3'"
+		printf "$RED TEST 6 fail:$RESET 'printf \"\" | $CP 1 2 3'\n"
 	fi
 	tests=$((tests + 1))
 	#	TEST 7
-	out1=$(echo -n "" | $C 3 1 2 > out.log 2>&1; cat out.log)
-	out2=$(echo -n "" | $CP 3 1 2 > out.log 2>&1; cat out.log | head -c 5)
-	if [ $out1 = $out2 ]
+	out1=$(printf "" | $C 3 1 2 > out.log 2>&1; cat out.log)
+	out2=$(printf "" | $CP 3 1 2 > out.log 2>&1; cat out.log | head -c 5)
+	if [ "$out1" = "$out2" ]
 	then
 		ok=$((ok + 1))
 		rm out.log
 	else
 		ko=$((ko + 1))
-		echo "$RED TEST 7 fail:$RESET 'echo -n \"\" | $CP 3 1 2'"
+		printf "$RED TEST 7 fail:$RESET 'printf \"\" | $CP 3 1 2'\n"
 	fi
 	tests=$((tests + 1))
 	#	TEST 8
-	out1=$(echo -n "" | $C "" 1 > out.log 2>&1; cat out.log)
-	out2=$(echo -n "" | $CP "" 1 > out.log 2>&1; cat out.log | head -c 5)
-	if [ "$out1" = $out2 ]
+	out1=$(printf "" | $C "" 1 > out.log 2>&1; cat out.log)
+	out2=$(printf "" | $CP "" 1 > out.log 2>&1; cat out.log | head -c 5)
+	if [ "$out1" = "$out2" ]
 	then
 		ok=$((ok + 1))
 		rm out.log
 	else
 		ko=$((ko + 1))
-		echo "$RED TEST 8 fail:$RESET 'echo -n \"\" | $CP \"\" 1'"
+		printf "$RED TEST 8 fail:$RESET 'printf \"\" | $CP \"\" 1'\n"
 	fi
 	tests=$((tests + 1))
 	#	TEST 9
 	out1=$($P 3 1 2 | $C 3 1 2 > out.log 2>&1; cat out.log)
 	out2=$($P 3 1 2 | $CP 3 1 2 > out.log 2>&1; cat out.log | head -c 5)
-	if [ "$out1" = $out2 ]
+	if [ "$out1" = "$out2" ]
 	then
 		ok=$((ok + 1))
 		rm out.log
 	else
 		ko=$((ko + 1))
-		echo "$RED TEST 9 fail:$RESET '$P 3 1 2 | $CP 3 1 2'"
+		printf "$RED TEST 9 fail:$RESET '$P 3 1 2 | $CP 3 1 2'\n"
 	fi
 	tests=$((tests + 1))
 	#	TEST 10
 	out1=$($P 3 1 2 4 6 5 7 9 8 | $C 3 1 2 4 6 5 7 9 8 > out.log 2>&1; cat out.log)
 	out2=$($P 3 1 2 4 6 5 7 9 8 | $CP 3 1 2 4 6 5 7 9 8 > out.log 2>&1; cat out.log | head -c 5)
-	if [ "$out1" = $out2 ]
+	if [ "$out1" = "$out2" ]
 	then
 		ok=$((ok + 1))
 		rm out.log
 	else
 		ko=$((ko + 1))
-		echo "$RED TEST 10 fail:$RESET '$P 3 1 2 4 6 5 7 9 8 | $CP 3 1 2 4 6 5 7 9 8'"
+		printf "$RED TEST 10 fail:$RESET '$P 3 1 2 4 6 5 7 9 8 | $CP 3 1 2 4 6 5 7 9 8'\n"
 	fi
 	tests=$((tests + 1))
 	#	TEST 11
 	out1=$($P 3 1 2 4 6 5 7 8 9 | $C 3 1 2 4 6 5 7 9 8 > out.log 2>&1; cat out.log)
 	out2=$($P 3 1 2 4 6 5 7 8 9 | $CP 3 1 2 4 6 5 7 9 8 > out.log 2>&1; cat out.log | head -c 5)
-	if [ "$out1" = $out2 ]
+	if [ "$out1" = "$out2" ]
 	then
 		ok=$((ok + 1))
 		rm out.log
 	else
 		ko=$((ko + 1))
-		echo "$RED TEST 11 fail:$RESET '$P 3 1 2 4 6 5 7 8 9 | $CP 3 1 2 4 6 5 7 9 8'"
+		printf "$RED TEST 11 fail:$RESET '$P 3 1 2 4 6 5 7 8 9 | $CP 3 1 2 4 6 5 7 9 8'\n"
 	fi
 	tests=$((tests + 1))
-	echo -n "$PURPLE Tests: $WHITE$tests$PURPLE ok: $GREEN$ok$RESET"
+	printf "$PURPLE Tests: $WHITE$tests$PURPLE ok: $GREEN$ok$RESET"
 	if [ $ko -gt 0 ]
 	then
-		echo "$PURPLE ko: $RED$ko$RESET"
+		printf "$PURPLE ko: $RED$ko$RESET\n"
 	else
-		echo ""
+		printf "\n"
 	fi
 }
 
@@ -236,7 +236,7 @@ ft_check_mandatory()
 		else
 			ko=""
 		fi
-		echo "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$i$RESET$PURPLE	OK: $MC$ok$RESET$ko"
+		printf "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$i$RESET$PURPLE	OK: $MC$ok$RESET$ko\n"
 	done
 }
 
@@ -279,7 +279,7 @@ ft_check_custom()
 		else
 			ko=""
 		fi
-	echo "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$stack_size$RESET$PURPLE	OK: $MC$ok$RESET$ko$PURPLE Max: $MC$max$RESET"
+	printf "$PURPLE Tests: $WHITE$tests$RESET$PURPLE Size: $CYAN$stack_size$RESET$PURPLE	OK: $MC$ok$RESET$ko$PURPLE Max: $MC$max$RESET\n"
 }
 
 ft_check_range ()
@@ -299,45 +299,50 @@ ft_check_executables()
 	# check executables existence
 	if ! [ -e $P ]
 	then
-		echo "'$P' executable not found"
-		echo "Try with 'make -C ..'"
+		printf "'$P' executable not found\n"
+		printf "Try with 'make -C ..'\n"
 		exit 1
 	elif ! [ -e $C ]
 	then
-		echo "'$C' executable not found"
-		echo "Try cloning the repository again"
+		printf "'$C' executable not found\n"
+		printf "Try cloning the repository again\n"
 		exit 1
 	elif [ $1 -eq 2 ] && ! [ -e $CP ]
 	then
-		echo "'$CP' executable not found"
-		echo "Try with 'make bonus -C ..'"
+		printf "'$CP' executable not found\n"
+		printf "Try with 'make bonus -C ..'\n"
 		exit 1
 	fi
 	# check executables permissions
 	if [ "$(uname)" = "Linux" ] && ! [ $(stat -c %A $P | tr -cd x | wc -c) -eq 3 ]
 	then
-		echo "'$P' executable must have execution permissions"
-		echo "Try with 'chmod +x $P'"
+		printf "'$P' executable must have execution permissions\n"
+		printf "Try with 'chmod +x $P'\n"
 		exit 1
 	elif ! [ "$(uname)" = "Linux" ] && ! [ $(stat $P | awk '{print $3}' | tr -cd x | wc -c) -eq 3 ]
 	then
-		echo "'$P' executable must have execution permissions"
-		echo "Try with 'chmod +x $P'"
+		printf "'$P' executable must have execution permissions\n"
+		printf "Try with 'chmod +x $P'\n"
 		exit 1
 	elif [ "$(uname)" = "Linux" ] && ! [ $(stat -c %A $C | tr -cd x | wc -c) -eq 3 ]
 	then
-		echo "'$C' executable must have execution permissions"
-		echo "Try with 'chmod +x $C'"
+		printf "'$C' executable must have execution permissions\n"
+		printf "Try with 'chmod +x $C'\n"
 		exit 1
 	elif ! [ "$(uname)" = "Linux" ] && ! [ $(stat $C | awk '{print $3}' | tr -cd x | wc -c) -eq 3 ]
 	then
-		echo "'$C' executable must have execution permissions"
-		echo "Try with 'chmod +x $C'"
+		printf "'$C' executable must have execution permissions\n"
+		printf "Try with 'chmod +x $C'\n"
 		exit 1
-	elif [ $1 -eq 2 ] && ! [ $(stat -c %A $CP | tr -cd x | wc -c) -eq 3 ]
+	elif [ "$(uname)" = "Linux" ] && [ $1 -eq 2 ] && ! [ $(stat -c %A $CP | tr -cd x | wc -c) -eq 3 ]
 	then
-		echo "'$CP' executable must have execution permissions"
-		echo "Try with 'chmod +x $CP'"
+		printf "'$CP' executable must have execution permissions\n"
+		printf "Try with 'chmod +x $CP'\n"
+		exit 1
+	elif ! [ "$(uname)" = "Linux" ] && [ $1 -eq 2 ] && ! [ $(stat $CP | awk '{print $3}' | tr -cd x | wc -c) -eq 3 ]
+	then
+		printf "'$CP' executable must have execution permissions\n"
+		printf "Try with 'chmod +x $CP'\n"
 		exit 1
 	fi
 }
@@ -390,50 +395,50 @@ fi
 # check flags
 case $1 in
 	-h|--help)
-		echo "PUSH_SWAP_TESTER"
-		echo "This is a simple script that tests your push_swap program."
-		echo "It's easy to use and works on Linux and MacOS."
-		echo ""
-		echo "OPTIONS"
-		echo " ./tester m	checks for the mandatory part."
-		echo " ./tester b	checks for the bonus part."
-		echo " ./tester a	checks for both, mandatory and bonus."
-		echo " ./tester c	allows you to do custom tests."
-		echo " ./tester r	allows you to do custom tests in a range of numbers."
-		echo "  -h, --help	display this help and exit."
-		echo ""
-		echo "OUTPUT"
-		echo "Tests: [1] Size: [2] OK: [3] KO: [4]"
-		echo "1) is the the numbers of tests executed."
-		echo "2) is the size of the stack used in those tests."
-		echo "3) is the number of the successfull tests and if you pass all of them then"
-		echo "     this number will be colored on the base of the evaluation sheet."
-		echo "4) is the number of the failed tests (if there aren't, you won't see this number)."
-		echo ""
-		echo "The colors that ok can be are these:"
-		echo "$RED RED$RESET	it's for grade 1/5"
-		echo "$ORANGE ORANGE$RESET	it's for grade 2/5"
-		echo "$YELLOW YELLOW$RESET	it's for grade 3/5"
-		echo "$CYAN BLUE$RESET	it's for grade 4/5"
-		echo "$GREEN GREEN$RESET	it's for grade 5/5"
-		echo "$WHITE WHITE$RESET	it's for everything that's not on the evaluation sheet."
-		echo ""
-		echo "EXAMPLES"
-		echo "./tester c 500 30"
-		echo "	$PURPLE Tests:$WHITE 30$PURPLE Size:$CYAN 500$PURPLE	OK:$YELLOW 30$PURPLE Max:$YELLOW 8643$RESET"
-		echo ""
-		echo "AUTHOR"
-		echo "Written by adi-stef aka Aldisti <https://github.com/Aldisti>."
-		echo ""
-		echo "REPORTING BUGS"
-		echo "To report bugs you can write me on slack: adi-stef."
+		printf "PUSH_SWAP_TESTER\n"
+		printf "This is a simple script that tests your push_swap program.\n"
+		printf "It's easy to use and works on Linux and MacOS.\n"
+		printf "\n"
+		printf "OPTIONS\n"
+		printf " ./tester m	checks for the mandatory part.\n"
+		printf " ./tester b	checks for the bonus part.\n"
+		printf " ./tester a	checks for both, mandatory and bonus.\n"
+		printf " ./tester c	allows you to do custom tests.\n"
+		printf " ./tester r	allows you to do custom tests in a range of numbers.\n"
+		printf "  -h, --help	display this help and exit.\n"
+		printf "\n"
+		printf "OUTPUT\n"
+		printf "Tests: [1] Size: [2] OK: [3] KO: [4]\n"
+		printf "1) is the the numbers of tests executed.\n"
+		printf "2) is the size of the stack used in those tests.\n"
+		printf "3) is the number of the successfull tests and if you pass all of them then\n"
+		printf "     this number will be colored on the base of the evaluation sheet.\n"
+		printf "4) is the number of the failed tests (if there aren't, you won't see this number).\n"
+		printf "\n"
+		printf "The colors that ok can be are these:\n"
+		printf "$RED RED$RESET	it's for grade 1/5\n"
+		printf "$ORANGE ORANGE$RESET	it's for grade 2/5\n"
+		printf "$YELLOW YELLOW$RESET	it's for grade 3/5\n"
+		printf "$CYAN BLUE$RESET	it's for grade 4/5\n"
+		printf "$GREEN GREEN$RESET	it's for grade 5/5\n"
+		printf "$WHITE WHITE$RESET	it's for everything that's not on the evaluation sheet.\n"
+		printf "\n"
+		printf "EXAMPLES\n"
+		printf "./tester c 500 30\n"
+		printf "	$PURPLE Tests:$WHITE 30$PURPLE Size:$CYAN 500$PURPLE	OK:$YELLOW 30$PURPLE Max:$YELLOW 8643$RESET\n"
+		printf "\n"
+		printf "AUTHOR\n"
+		printf "Written by adi-stef aka Aldisti <https://github.com/Aldisti>.\n"
+		printf "\n"
+		printf "REPORTING BUGS\n"
+		printf "To report bugs you can write me on slack: adi-stef.\n"
 		exit 0
 	;;
 	m)
 		shift
 		if ! [ $# -eq 0 ]
 		then
-			echo "'m' option doesn't expect any arguments"
+			printf "'m' option doesn't expect any arguments\n"
 			exit 1
 		fi
 		ft_check_executables 1
@@ -444,7 +449,7 @@ case $1 in
 		shift
 		if ! [ $# -eq 0 ]
 		then
-			echo "'b' option doesn't expect any arguments"
+			printf "'b' option doesn't expect any arguments\n"
 			exit 1
 		fi
 		ft_check_executables 2
@@ -455,7 +460,7 @@ case $1 in
 		shift
 		if ! [ $# -eq 0 ]
 		then
-			echo "'a' option doesn't expect any arguments"
+			printf "'a' option doesn't expect any arguments\n"
 			exit 1
 		fi
 		# do both
@@ -467,31 +472,31 @@ case $1 in
 		shift
 		if ! [ $# -eq 2 ]
 		then
-			echo "'c' option expects only 2 arguments"
+			printf "'c' option expects only 2 arguments\n"
 			exit 1
 		fi
 		if [ "$1" = "" ] || [ "$2" = "" ]
 		then
-			echo "You have to insert 2 numbers as argument"
-			echo "Command sould be of this type:"
-			echo "./tester c [stack_size] [number_of_tests]"
+			printf "You have to insert 2 numbers as argument\n"
+			printf "Command sould be of this type:\n"
+			printf "./tester c [stack_size] [number_of_tests]\n"
 			exit 1
 		fi
 		[ -n "$1" ] && [ "$1" -eq "$1" ] 2>/dev/null
 		if ! [ $? -eq 0 ]
 		then
-			echo "Input arguments must be integers"
+			printf "Input arguments must be integers\n"
 			exit 1
 		fi
 		[ -n "$2" ] && [ "$2" -eq "$2" ] 2>/dev/null
 		if ! [ $? -eq 0 ]
 		then
-			echo "Input arguments must be integers"
+			printf "Input arguments must be integers\n"
 			exit 1
 		fi
 		if [ $1 -lt 0 ] || [ $2 -lt 0 ]
 		then
-			echo "Input arguments must be greater than zero"
+			printf "Input arguments must be greater than zero\n"
 			exit 1
 		fi
 		# do custom
@@ -501,37 +506,37 @@ case $1 in
 		shift
 		if ! [ $# -eq 3 ]
 		then
-			echo "'r' option expects only 2 arguments"
+			printf "'r' option expects only 2 arguments\n"
 			exit 1
 		fi
 		if [ "$1" = "" ] || [ "$2" = "" ] || [ "$3" = "" ]
 		then
-			echo "You have to insert 2 numbers as argument"
-			echo "Command sould be of this type:"
-			echo "./tester r [stack_size] [number_of_tests]"
+			printf "You have to insert 2 numbers as argument\n"
+			printf "Command sould be of this type:\n"
+			printf "./tester r [stack_size] [number_of_tests]\n"
 			exit 1
 		fi
 		[ -n "$1" ] && [ "$1" -eq "$1" ] 2>/dev/null
 		if ! [ $? -eq 0 ]
 		then
-			echo "Input arguments must be integers"
+			printf "Input arguments must be integers\n"
 			exit 1
 		fi
 		[ -n "$2" ] && [ "$2" -eq "$2" ] 2>/dev/null
 		if ! [ $? -eq 0 ]
 		then
-			echo "Input arguments must be integers"
+			printf "Input arguments must be integers\n"
 			exit 1
 		fi
 		[ -n "$3" ] && [ "$3" -eq "$3" ] 2>/dev/null
 		if ! [ $? -eq 0 ]
 		then
-			echo "Input arguments must be integers"
+			printf "Input arguments must be integers\n"
 			exit 1
 		fi
 		if [ $1 -lt 0 ] || [ $2 -lt 0 ] || [ $3 -lt 0 ]
 		then
-			echo "Input arguments must be greater than zero"
+			printf "Input arguments must be greater than zero\n"
 			exit 1
 		fi
 		# do custom range
@@ -541,28 +546,28 @@ case $1 in
 		shift
 		if ! [ $# -eq 0 ]
 		then
-			echo "'l' option doesn't expect any arguments"
+			printf "'l' option doesn't expect any arguments\n"
 			exit 1
 		fi
-		echo "$RED RED$RESET	is for grade 1/5"
-		echo "$ORANGE ORANGE$RESET	is for grade 2/5"
-		echo "$YELLOW YELLOW$RESET	is for grade 3/5"
-		echo "$CYAN BLUE$RESET	is for grade 4/5"
-		echo "$GREEN GREEN$RESET	is for grade 5/5"
+		printf "$RED RED$RESET	is for grade 1/5\n"
+		printf "$ORANGE ORANGE$RESET	is for grade 2/5\n"
+		printf "$YELLOW YELLOW$RESET	is for grade 3/5\n"
+		printf "$CYAN BLUE$RESET	is for grade 4/5\n"
+		printf "$GREEN GREEN$RESET	is for grade 5/5\n"
 		exit 0
 	;;
 	-*)
-		echo "'$1': invalid option"
-		echo "Try with './tester --help' for more information"
+		printf "'$1': invalid option\n"
+		printf "Try with './tester --help' for more information\n"
 		exit 1
 	;;
 	"")
-		echo "Try with './tester --help' for more information"
+		printf "Try with './tester --help' for more information\n"
 		exit 1
 	;;
 	*)
-		echo "'$1': bad argument"
-		echo "Try with './tester --help' for more information"
+		printf "'$1': bad argument\n"
+		printf "Try with './tester --help' for more information\n"
 		exit 1
 	;;
 esac
